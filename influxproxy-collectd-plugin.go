@@ -1,6 +1,7 @@
 package main
 
 import (
+	"github.com/influxdb/influxdb-go"
 	"github.com/influxproxy/influxproxy/plugin"
 )
 
@@ -30,8 +31,9 @@ func (f Functions) Describe() plugin.Description {
 	return d
 }
 
-func (f Functions) Run(in []*interface{}) string {
-	return "Run"
+func (f Functions) Run(in string) []influxdb.Series {
+	out := new([]influxdb.Series)
+	return *out
 }
 
 func main() {
