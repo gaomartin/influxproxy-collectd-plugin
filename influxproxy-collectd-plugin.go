@@ -24,5 +24,5 @@ func main() {
 	f := Functions{}
 	p, _ := plugin.NewPlugin()
 	p.Run(f)
-	time.Sleep(30 * time.Second)
+	time.Sleep(20 * time.Second)
 }
