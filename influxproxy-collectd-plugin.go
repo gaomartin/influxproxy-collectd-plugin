@@ -1,8 +1,6 @@
 package main
 
 import (
-	"time"
-
 	"github.com/influxproxy/influxproxy/plugin"
 )
 
@@ -24,5 +22,4 @@ func main() {
 	f := Functions{}
 	p, _ := plugin.NewPlugin()
 	p.Run(f)
-	time.Sleep(20 * time.Second)
 }
