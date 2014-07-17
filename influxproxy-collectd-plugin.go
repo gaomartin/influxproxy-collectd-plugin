@@ -31,7 +31,7 @@ func (f Functions) Describe() plugin.Description {
 	return d
 }
 
-func (f Functions) Run(in string) []influxdb.Series {
+func (f Functions) Run(in plugin.Request) []influxdb.Series {
 	out := new([]influxdb.Series)
 	return *out
 }
