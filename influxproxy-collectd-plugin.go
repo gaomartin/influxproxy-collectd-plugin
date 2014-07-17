@@ -24,16 +24,20 @@ func (f Functions) Describe() plugin.Description {
 
 	d := plugin.Description{
 		Description: "This plugin works as endpoint for CollectD, feeding the posted data into the given InfluxDB",
-		Author:      "githob.com/sontags",
+		Author:      "github.com/sontags",
 		Version:     "0.1.0",
 		Arguments:   *args,
 	}
 	return d
 }
 
-func (f Functions) Run(in plugin.Request) []influxdb.Series {
-	out := new([]influxdb.Series)
-	return *out
+func (f Functions) Run(in plugin.Request) plugin.Response {
+	series := new([]influxdb.Series)
+	resp := plugin.Response{
+		Series: *series,
+		Error:  "Not yet implemented",
+	}
+	return resp
 }
 
 func main() {
