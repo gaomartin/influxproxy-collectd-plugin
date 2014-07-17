@@ -1,6 +1,10 @@
 package main
 
 import (
+	"encoding/json"
+	"io"
+	"strings"
+
 	"github.com/influxdb/influxdb-go"
 	"github.com/influxproxy/influxproxy/plugin"
 )
@@ -15,8 +19,8 @@ func (f Functions) Describe() plugin.Description {
 	args := new([]plugin.Argument)
 
 	arg := plugin.Argument{
-		Name:        "test",
-		Description: "test",
+		Name:        "prefix",
+		Description: "Prefix of the series, will be separated with a '.' if given",
 		Optional:    true,
 	}
 
@@ -32,12 +36,29 @@ func (f Functions) Describe() plugin.Description {
 }
 
 func (f Functions) Run(in plugin.Request) plugin.Response {
-	series := new([]influxdb.Series)
-	resp := plugin.Response{
-		Series: *series,
-		Error:  "Not yet implemented",
+
+	var series []influxdb.Series
+	dec := json.NewDecoder(strings.NewReader(in.Body))
+	for {
+		var datasets []Dataset
+		if err := dec.Decode(&datasets); err == io.EOF {
+			break
+		} else if err != nil {
+			return plugin.Response{
+				Series: nil,
+				Error:  err.Error(),
+			}
+		}
+
+		for _, ds := range datasets {
+			series = append(series, ds.GetAsSeries(in.Query.Get("prefix"))...)
+		}
 	}
-	return resp
+
+	return plugin.Response{
+		Series: series,
+		Error:  "",
+	}
 }
 
 func main() {
