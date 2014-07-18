@@ -22,6 +22,7 @@ func (f Functions) Describe() plugin.Description {
 				Name:        "prefix",
 				Description: "Prefix of the series, will be separated with a '.' if given",
 				Optional:    true,
+				Default:     "",
 			},
 		},
 	}
