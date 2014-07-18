@@ -16,7 +16,7 @@ func (f Functions) Describe() plugin.Description {
 		Description: "This plugin works as endpoint for CollectD, feeding the posted data into the given InfluxDB",
 		Author:      "github.com/sontags",
 		Version:     "0.1.0",
-		Arguments: &[]plugin.Argument{
+		Arguments: []plugin.Argument{
 			{
 				Name:        "prefix",
 				Description: "Prefix of the series, will be separated with a '.' if given",
