@@ -12,15 +12,13 @@ import (
 type Functions struct{}
 
 func (f Functions) Describe() plugin.Description {
-	args := new([]plugin.Argument)
-
-	arg := plugin.Argument{
-		Name:        "prefix",
-		Description: "Prefix of the series, will be separated with a '.' if given",
-		Optional:    true,
+	args := &[]plugin.Argument{
+		{
+			Name:        "prefix",
+			Description: "Prefix of the series, will be separated with a '.' if given",
+			Optional:    true,
+		},
 	}
-
-	*args = append(*args, arg)
 
 	d := plugin.Description{
 		Description: "This plugin works as endpoint for CollectD, feeding the posted data into the given InfluxDB",
