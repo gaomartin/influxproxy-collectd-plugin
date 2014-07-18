@@ -11,10 +11,6 @@ import (
 
 type Functions struct{}
 
-func (f Functions) Ping() bool {
-	return true
-}
-
 func (f Functions) Describe() plugin.Description {
 	args := new([]plugin.Argument)
 
