@@ -2,6 +2,7 @@ package main
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"strings"
 
@@ -55,6 +56,10 @@ func (f Functions) Run(in plugin.Request) plugin.Response {
 
 func main() {
 	f := Functions{}
-	p, _ := plugin.NewPlugin()
-	p.Run(f)
+	p, err := plugin.NewPlugin()
+	if err != nil {
+		fmt.Println(err)
+	} else {
+		p.Run(f)
+	}
 }
