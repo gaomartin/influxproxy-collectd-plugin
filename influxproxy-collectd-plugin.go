@@ -30,7 +30,7 @@ func (f Functions) Describe() plugin.Description {
 
 func (f Functions) Run(in plugin.Request) plugin.Response {
 
-	var series []influxdb.Series
+	var series []*influxdb.Series
 	dec := json.NewDecoder(strings.NewReader(in.Body))
 	for {
 		var datasets []Dataset

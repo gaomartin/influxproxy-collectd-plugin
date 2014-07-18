@@ -17,8 +17,8 @@ type Dataset struct {
 	TypeInstance   string    `json:"type_instance"`
 }
 
-func (ds *Dataset) GetAsSeries(influxdbPrefix string) []influxdb.Series {
-	var series []influxdb.Series
+func (ds *Dataset) GetAsSeries(influxdbPrefix string) []*influxdb.Series {
+	var series []*influxdb.Series
 
 	name := ds.Host + "." + ds.Plugin
 	if ds.PluginInstance != "" {
@@ -44,7 +44,7 @@ func (ds *Dataset) GetAsSeries(influxdbPrefix string) []influxdb.Series {
 				},
 			}
 
-			series = append(series, *out)
+			series = append(series, out)
 		}
 	}
 
