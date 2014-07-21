@@ -17,6 +17,14 @@ type Dataset struct {
 	TypeInstance   string    `json:"type_instance"`
 }
 
+// [
+// {"values":[0,0.01,0.05],"dstypes":["gauge","gauge","gauge"],"dsnames":["shortterm","midterm","longterm"],"time":1405941780.747,"interval":10.000,"host":"raspi","plugin":"load","plugin_instance":"","type":"load","type_instance":""},
+// {"values":[4.41139e+07],"dstypes":["gauge"],"dsnames":["value"],"time":1405941780.763,"interval":10.000,"host":"raspi","plugin":"memory","plugin_instance":"","type":"memory","type_instance":"used"},
+// {"values":[5.21093e+07],"dstypes":["gauge"],"dsnames":["value"],"time":1405941780.770,"interval":10.000,"host":"raspi","plugin":"memory","plugin_instance":"","type":"memory","type_instance":"buffered"},
+// {"values":[6.04897e+07],"dstypes":["gauge"],"dsnames":["value"],"time":1405941780.770,"interval":10.000,"host":"raspi","plugin":"memory","plugin_instance":"","type":"memory","type_instance":"cached"},
+// {"values":[3.02793e+08],"dstypes":["gauge"],"dsnames":["value"],"time":1405941780.770,"interval":10.000,"host":"raspi","plugin":"memory","plugin_instance":"","type":"memory","type_instance":"free"}
+// ]
+
 func (ds *Dataset) GetAsSeries(influxdbPrefix string) []*influxdb.Series {
 	var series []*influxdb.Series
 
