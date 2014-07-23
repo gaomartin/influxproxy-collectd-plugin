@@ -1,10 +1,11 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"io"
-	"strings"
+	"io/ioutil"
 
 	influxdb "github.com/influxdb/influxdb/client"
 	"github.com/influxproxy/influxproxy/plugin"
@@ -32,7 +33,7 @@ func (f Functions) Describe() plugin.Description {
 func (f Functions) Run(in plugin.Request) plugin.Response {
 
 	var series []*influxdb.Series
-	dec := json.NewDecoder(strings.NewReader(in.Body))
+	dec := json.NewDecoder(bytes.NewReader(in.Body))
 	for {
 		var datasets []Dataset
 		if err := dec.Decode(&datasets); err == io.EOF {
@@ -53,6 +54,15 @@ func (f Functions) Run(in plugin.Request) plugin.Response {
 		Series: series,
 		Error:  "",
 	}
+}
+
+func getBodyAsString(body io.ReadCloser) (string, error) {
+	b, err := ioutil.ReadAll(body)
+	if err != nil {
+		return "", err
+	}
+	out := string(b)
+	return out, nil
 }
 
 func main() {
